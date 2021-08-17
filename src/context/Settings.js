@@ -24,11 +24,11 @@ function List(props) {
   }
 
   function toggleComplete(id) {
-    console.log('1 ubyviiyvviyk', id);
+
 
     const items = list.map((item) => {
       if (item.id === id) {
-        console.log('1 ubyviiyvviyk', item.id);
+
         item.complete = !item.complete;
       }
       return item;

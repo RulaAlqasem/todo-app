@@ -32,7 +32,7 @@ function List(props) {
 
   function pagination() {
     let result = list.slice(startIndex, endIndex);
-    console.log('😏', result);
+
     return result;
   }
 
@@ -64,10 +64,10 @@ function List(props) {
     }
     return () => {
       let localList = JSON.parse(localStorage.getItem('List'))
-      console.log(localList)
+
       setList(localList);
     }
-  }, [])
+  }, [""])
 
   const listOfTodos = pagination().map((item, idx) => {
 
