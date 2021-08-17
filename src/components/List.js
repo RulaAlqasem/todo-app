@@ -2,7 +2,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import "./list.scss"
 
-import { Card, Button, Icon, FormGroup, InputGroup, Navbar, Label } from "@blueprintjs/core";
+import { Card, Button, Icon, Label } from "@blueprintjs/core";
 // import { Colors } from "@blueprintjs/core";
 
 import { ListContext } from '../context/Settings';
