@@ -14,6 +14,7 @@ function List(props) {
     values.complete = false;
     setList([...list, values]);
     console.log(values);
+    localStorage.setItem('List', JSON.stringify(list))
   }
 
   function handleChange(event) {
@@ -42,7 +43,7 @@ function List(props) {
     setList(items);
   }
 
-  return <ListContext.Provider value={{ list, handleSubmit, handleChange, toggleComplete, deleteItem, itemNumber, setItemNumber }}>{props.children}</ListContext.Provider>;
+  return <ListContext.Provider value={{ list, handleSubmit, handleChange, toggleComplete, deleteItem, itemNumber, setItemNumber, setList }}>{props.children}</ListContext.Provider>;
 }
 
 export default List;

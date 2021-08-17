@@ -7,9 +7,11 @@ import { Card, Button, Icon, Label } from "@blueprintjs/core";
 
 import { ListContext } from '../context/Settings';
 
+
+
 function List(props) {
 
-  const { list, toggleComplete, deleteItem, itemNumber, setItemNumber } = useContext(ListContext);
+  const { list, toggleComplete, deleteItem, itemNumber, setItemNumber, setList } = useContext(ListContext);
 
 
   const [done, setDone] = useState([]);
@@ -55,6 +57,17 @@ function List(props) {
   useEffect(() => {
     setDone(list);
   }, [list]);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('List'))) {
+      setList(JSON.parse(localStorage.getItem('List')))
+    }
+    return () => {
+      let localList = JSON.parse(localStorage.getItem('List'))
+      console.log(localList)
+      setList(localList);
+    }
+  }, [])
 
   const listOfTodos = pagination().map((item, idx) => {
 
