@@ -6,6 +6,7 @@ function List(props) {
 
   const [list, setList] = useState([]);
   const [values, setValues] = useState({});
+  const [itemNumber, setItemNumber] = useState(3);
 
   function handleSubmit(event) {
     if (event) event.preventDefault();
@@ -41,7 +42,7 @@ function List(props) {
     setList(items);
   }
 
-  return <ListContext.Provider value={{ list, handleSubmit, handleChange, toggleComplete, deleteItem }}>{props.children}</ListContext.Provider>;
+  return <ListContext.Provider value={{ list, handleSubmit, handleChange, toggleComplete, deleteItem, itemNumber, setItemNumber }}>{props.children}</ListContext.Provider>;
 }
 
 export default List;

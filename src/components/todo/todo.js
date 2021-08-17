@@ -42,12 +42,12 @@ const ToDo = (props) => {
 
           <Label intent="danger">
             <span>To Do Item</span>
-            <InputGroup onChange={handleChange} name="text" type="text" placeholder="Item Details" intent="danger" />
+            <InputGroup onChange={handleChange} name="text" type="text" placeholder="Item Details" intent="danger" autoComplete="off" />
           </Label>
 
           <Label intent="danger">
             <span>Assigned To</span>
-            <InputGroup onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" intent="danger" />
+            <InputGroup onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" intent="danger" autoComplete="off" />
           </Label>
 
           <Label>
