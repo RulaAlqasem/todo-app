@@ -1,0 +1,63 @@
+.card {
+  margin: 0.3rem;
+}
+.span1 {
+  background-color: rgb(35, 161, 41);
+  border-radius: 20px;
+  padding: 0.5rem;
+}
+.span2 {
+  background-color: rgb(0, 255, 213);
+  border-radius: 20px;
+  padding: 0.5rem;
+}
+.hard {
+  background: #c26464;
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  text-align: -webkit-center;
+  font-weight: bolder;
+  width: 30rem;
+}
+.easy {
+  background: rgb(162, 201, 233);
+  color: rgb(4, 73, 44);
+  font-size: 1rem;
+  text-align: -webkit-center;
+  font-weight: bolder;
+  width: 30rem;
+}
+.medium {
+  background: rgb(176, 152, 221);
+  color: rgb(17, 48, 66);
+  font-size: 1rem;
+  font-weight: bolder;
+  text-align: -webkit-center;
+  width: 30rem;
+}
+.btn {
+  font-weight: bolder;
+  width: 8rem;
+  font-size: 1rem;
+  font-weight: bolder;
+}
+#root > div:nth-child(3) {
+  text-align: -webkit-center;
+}
+.off {
+  font-weight: bolder;
+  width: 8rem;
+  background-color: rgb(80, 180, 80);
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  font-weight: bolder;
+}
+.on {
+  font-weight: bolder;
+  width: 8rem;
+  background-color: rgb(71, 70, 70);
+
+  font-size: 1rem;
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+}
