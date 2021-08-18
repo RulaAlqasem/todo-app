@@ -1,5 +1,5 @@
 
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import "./list.scss"
 
 import { Card, Button, Icon, Label } from "@blueprintjs/core";
@@ -58,7 +58,7 @@ function List(props) {
     setDone(list);
   }, [list]);
 
-  useEffect(() => {
+  let saveto = useCallback(() => {
     if (JSON.parse(localStorage.getItem('List'))) {
       setList(JSON.parse(localStorage.getItem('List')))
     }
@@ -67,7 +67,12 @@ function List(props) {
 
       setList(localList);
     }
-  }, [""])
+  }, [])// eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+
+    saveto()
+  }, [saveto])
 
   const listOfTodos = pagination().map((item, idx) => {
 
