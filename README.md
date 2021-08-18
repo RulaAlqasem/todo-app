@@ -69,8 +69,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
+# lab 31
 
-
-[sand pox link ](https://codesandbox.io/s/trusting-booth-i46gk)
-[pullrequest](https://github.com/RulaAlqasem/todo-app/pull/1)
+# https://github.com/RulaAlqasem/todo-app/pull/1
+# [sand pox link ](https://codesandbox.io/s/strange-hamilton-g5dv1)
 
