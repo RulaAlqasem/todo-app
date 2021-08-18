@@ -1,5 +1,5 @@
 
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import "./list.scss"
 
 import { Card, Button, Icon, Label } from "@blueprintjs/core";
@@ -18,6 +18,7 @@ function List(props) {
   const [a, setA] = useState("on");
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(itemNumber);
+
 
   function next() {
     setStartIndex(startIndex + itemNumber - 1);
@@ -58,7 +59,7 @@ function List(props) {
     setDone(list);
   }, [list]);
 
-  let saveto = useCallback(() => {
+  let saveto = async () => {
     if (JSON.parse(localStorage.getItem('List'))) {
       setList(JSON.parse(localStorage.getItem('List')))
     }
@@ -67,12 +68,13 @@ function List(props) {
 
       setList(localList);
     }
-  }, [])// eslint-disable-line react-hooks/exhaustive-deps
+  }// eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
 
-    saveto()
-  }, [saveto])
+    saveto().then(() => { console.log("done") })
+  }, [])
+
 
   const listOfTodos = pagination().map((item, idx) => {
 
