@@ -31,11 +31,7 @@ function List(props) {
     setEndIndex(endIndex - itemNumber);
   }
 
-  function pagination() {
-    let result = list.slice(startIndex, endIndex);
 
-    return result;
-  }
 
   useEffect(() => {
     setStartIndex(0);
@@ -76,7 +72,7 @@ function List(props) {
   }, [])
 
 
-  const listOfTodos = pagination().map((item, idx) => {
+  const listOfTodos = done.slice(startIndex, endIndex).map((item, idx) => {
 
     let deff;
     if (item.difficulty > 7) { deff = 'hard' }
@@ -104,9 +100,9 @@ function List(props) {
         <input onChange={handlePaginationChange} defaultValue={3} type="range" min={1} max={5} name="items-per-page" />
       </Label>
 
-      <Button className={a} onClick={displayComplete}>
+      <button className={a} onClick={displayComplete}>
         incomplete
-      </Button>
+      </button>
       <ul >
         {listOfTodos}
       </ul>
