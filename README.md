@@ -73,4 +73,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # [pull req](https://github.com/RulaAlqasem/todo-app/pull/2)
 # [sand pox link ](https://codesandbox.io/s/strange-hamilton-g5dv1)
-
+# [netlify](https://611cb3df85575da92e9d52e5--gifted-turing-757c74.netlify.app/)
