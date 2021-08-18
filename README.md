@@ -71,6 +71,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # lab 31
 
-# https://github.com/RulaAlqasem/todo-app/pull/1
+# [pull req](https://github.com/RulaAlqasem/todo-app/pull/2)
 # [sand pox link ](https://codesandbox.io/s/strange-hamilton-g5dv1)
 
