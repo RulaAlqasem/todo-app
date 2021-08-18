@@ -1,5 +1,5 @@
 
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import "./list.scss"
 
 import { Card, Button, Icon, Label } from "@blueprintjs/core";
@@ -19,6 +19,7 @@ function List(props) {
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(itemNumber);
 
+
   function next() {
     setStartIndex(startIndex + itemNumber - 1);
     setEndIndex(endIndex + itemNumber);
@@ -30,11 +31,7 @@ function List(props) {
     setEndIndex(endIndex - itemNumber);
   }
 
-  function pagination() {
-    let result = list.slice(startIndex, endIndex);
 
-    return result;
-  }
 
   useEffect(() => {
     setStartIndex(0);
@@ -58,7 +55,7 @@ function List(props) {
     setDone(list);
   }, [list]);
 
-  let saveto = useCallback(() => {
+  let saveto = async () => {
     if (JSON.parse(localStorage.getItem('List'))) {
       setList(JSON.parse(localStorage.getItem('List')))
     }
@@ -67,14 +64,15 @@ function List(props) {
 
       setList(localList);
     }
-  }, [])// eslint-disable-line react-hooks/exhaustive-deps
+  }// eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
 
-    saveto()
-  }, [saveto])
+    saveto().then(() => { console.log("done") })
+  }, [])
 
-  const listOfTodos = pagination().map((item, idx) => {
+
+  const listOfTodos = done.slice(startIndex, endIndex).map((item, idx) => {
 
     let deff;
     if (item.difficulty > 7) { deff = 'hard' }
@@ -102,9 +100,9 @@ function List(props) {
         <input onChange={handlePaginationChange} defaultValue={3} type="range" min={1} max={5} name="items-per-page" />
       </Label>
 
-      <Button className={a} onClick={displayComplete}>
+      <button className={a} onClick={displayComplete}>
         incomplete
-      </Button>
+      </button>
       <ul >
         {listOfTodos}
       </ul>
