@@ -10,5 +10,6 @@
 
 ### [pull req1](https://github.com/RulaAlqasem/todo-app/pull/2)
  ### [pull req2](https://github.com/RulaAlqasem/todo-app/commit/30d1752846e7ea7562fc1bc762d6f3d164c1c2d6)
-### [netlify](https://app.netlify.com/sites/pensive-kirch-f1e9d2/deploys/611d8b66a5127c1a77f9741a)
+ ### [pull req 3](https://github.com/RulaAlqasem/todo-app/pull/7)
+### [netlify](https://deploy-preview-7--eloquent-meninsky-cb757d.netlify.app/?utm_source=github&utm_campaign=bot_dp)
 
