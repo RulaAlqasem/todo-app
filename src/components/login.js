@@ -1,17 +1,18 @@
 import React, { Component, useState, useContext } from 'react'
 import { AuthContext } from '../context/auth';
+import { Card, Button, Icon, Label } from "@blueprintjs/core";
 import { If, Else, Then } from 'react-if';
-import { FormGroup, InputGroup, Button, Card, Label } from "@blueprintjs/core";
+
 
 
 
 function Login(props) {
-  const { loggedIn, logout, login } = useContext(AuthContext);
+  const { loggedIn, setLoggedIn, user, setUser, validateToken, logout, login, setLoginState } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("")
 
 
-
+  const contextType = AuthContext
   const handleChange = (e) => {
     setUsername(e.target.value)
   }
@@ -24,20 +25,23 @@ function Login(props) {
   }
 
   return (
-
-    <If condition={loggedIn}>
-      <Then>
-        <Button intent="danger" onClick={logout}>Logout</Button>
-      </Then>
-      <Else>
-        <form intent="danger" onSubmit={handleSubmit} style={{ "width": "28rem", "margin-left": "auto", "margin-top": "0px", "padding-top": "11px" }}>
-          <input intent="danger" type="text" name="username" placeholder="Enter Username" onChange={handleChange} />
-          <input intent="danger" type="text" name="password" placeholder="Enter Password" onChange={handleChange1} />
-          <Button intent="danger" >Login</Button>
-        </form>
-      </Else>
-    </If>
-
+    <div>
+      <If condition={loggedIn}>
+        <Then>
+          <Button intent="danger" onClick={logout} style={{
+            "margin-left": "1171px",
+            "margin-top": "18px"
+          }}>Logout</Button>
+        </Then>
+        <Else>
+          <form style={{ "width": "28rem", "margin-left": "auto", "margin-top": "0px", "padding-top": "11px" }}>
+            <input type="text" name="username" placeholder="Enter Username" onChange={handleChange} />
+            <input type="password" name="password" placeholder="Enter Password" onChange={handleChange1} />
+            <Button intent="danger" onClick={handleSubmit}>Login</Button>
+          </form>
+        </Else>
+      </If>
+    </div>
   )
 }
 

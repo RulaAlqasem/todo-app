@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../context/auth'
+
 import { If, Else, Then } from 'react-if';
 
 import Signup from './Signup';

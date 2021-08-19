@@ -32,10 +32,18 @@ const ToDo = (props) => {
 
   return (
     <>
-      <Navbar>
-        <h1>{incomplete} items pending</h1>
-      </Navbar>
+
+
+      <h1 style={{
+        'position': 'relative',
+        'left': "539px", "width": "223px",
+        'top': '104px'
+      }}>{incomplete} items pending</h1>
+
       <card className='app'>
+
+
+
         <FormGroup  >
 
           <h2 intent="danger">Add To Do Item</h2>
