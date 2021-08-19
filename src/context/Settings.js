@@ -6,7 +6,9 @@ function List(props) {
 
   const [list, setList] = useState([]);
   const [values, setValues] = useState({});
-  const [itemNumber, setItemNumber] = useState(3);
+  const [itemNumber, setItemNumber] = useState();
+  const [a, setA] = useState("on");
+  const [done, setDone] = useState([]);
 
   function handleSubmit(event) {
 
@@ -19,13 +21,18 @@ function List(props) {
     setList(JSON.parse(localStorage.getItem('List')));
   }
 
+  function handlePaginationChange(e) {
+
+    localStorage.setItem('itemNumber', JSON.stringify(e.target.value))
+    setItemNumber(JSON.parse(localStorage.getItem('itemNumber')));
+  }
   function handleChange(event) {
     console.log(event.target.value, "kkkkkk");
     setValues((values) => ({ ...values, [event.target.name]: event.target.value }));
 
   }
 
-  let saveto = async () => {
+  let getList = async () => {
     if (JSON.parse(localStorage.getItem('List'))) {
       setList(JSON.parse(localStorage.getItem('List')))
     }
@@ -35,12 +42,31 @@ function List(props) {
       setList(localList);
     }
   }// eslint-disable-line react-hooks/exhaustive-deps
+  let getItemNum = async () => {
+    if (JSON.parse(localStorage.getItem('itemNumber'))) {
+      setItemNumber(Number(JSON.parse(localStorage.getItem('itemNumber'))))
+    }
+    return () => {
+      let localList = Number(JSON.parse(localStorage.getItem('itemNumber')))
 
+      setItemNumber(localList);
+    }
+  }
   useEffect(() => {
 
-    saveto().then(() => { console.log("done") })
+    getItemNum().then(() => { console.log("done") })
+
+    getList().then(() => { console.log("done") })
+
 
   }, [])
+  function displayComplete() {
+    if (done === list)
+      setDone(() => done.filter((item) => item.complete !== true));
+    else setDone(list);
+
+    done === list ? setA('off') : setA('on')
+  }
 
   function toggleComplete(id) {
 
@@ -67,7 +93,7 @@ function List(props) {
     setList(c);
   }
 
-  return <ListContext.Provider value={{ list, handleSubmit, handleChange, toggleComplete, deleteItem, itemNumber, setItemNumber, setList }}>{props.children}</ListContext.Provider>;
+  return <ListContext.Provider value={{ list, handleSubmit, handleChange, toggleComplete, handlePaginationChange, a, setA, deleteItem, itemNumber, setItemNumber, setList, displayComplete, done, setDone }}>{props.children}</ListContext.Provider>;
 }
 
 export default List;

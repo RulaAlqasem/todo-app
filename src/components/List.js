@@ -11,11 +11,11 @@ import { ListContext } from '../context/Settings';
 
 function List(props) {
 
-  const { list, toggleComplete, deleteItem, itemNumber, setItemNumber, setList } = useContext(ListContext);
+  const { list, toggleComplete, deleteItem, itemNumber, setItemNumber, setList, handlePaginationChange, displayComplete, done, setDone, a, setA } = useContext(ListContext);
 
 
-  const [done, setDone] = useState([]);
-  const [a, setA] = useState("on");
+
+
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(itemNumber);
 
@@ -39,37 +39,29 @@ function List(props) {
   }, [itemNumber]);
 
 
-  function handlePaginationChange(e) {
-    setItemNumber(e.target.value);
-  }
 
-  function displayComplete() {
-    if (done === list)
-      setDone(() => done.filter((item) => item.complete !== true));
-    else setDone(list);
 
-    done === list ? setA('off') : setA('on')
-  }
+
 
   useEffect(() => {
     setDone(list);
   }, [list]);
 
-  let saveto = async () => {
-    if (JSON.parse(localStorage.getItem('List'))) {
-      setList(JSON.parse(localStorage.getItem('List')))
-    }
-    return () => {
-      let localList = JSON.parse(localStorage.getItem('List'))
+  // let saveto = async () => {
+  //   if (JSON.parse(localStorage.getItem('List'))) {
+  //     setList(JSON.parse(localStorage.getItem('List')))
+  //   }
+  //   return () => {
+  //     let localList = JSON.parse(localStorage.getItem('List'))
 
-      setList(localList);
-    }
-  }// eslint-disable-line react-hooks/exhaustive-deps
+  //     setList(localList);
+  //   }
+  // }// eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    saveto().then(() => { console.log("done") })
-  }, [])
+  //   saveto().then(() => { console.log("done") })
+  // }, [])
 
 
   const listOfTodos = done.slice(startIndex, endIndex).map((item, idx) => {
@@ -97,7 +89,7 @@ function List(props) {
       <Label>
         <Label>Items Per Page</Label>
 
-        <input onChange={handlePaginationChange} defaultValue={3} type="range" min={1} max={5} name="items-per-page" />
+        <input onChange={handlePaginationChange} defaultValue={endIndex} type="range" min={1} max={5} name="items-per-page" />
       </Label>
 
       <button className={a} onClick={displayComplete}>
