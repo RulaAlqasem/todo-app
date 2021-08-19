@@ -71,7 +71,7 @@ function List(props) {
     else if (item.difficulty > 5 && item.difficulty <= 7) { deff = 'medium' }
     else { deff = 'easy' }
     return (
-      <Card className={deff}>
+      <Card className={deff} >
         <p>todo: {item.text}</p>
         <p>Assigned to: {item.assignee}</p>
         <p>difficulty : {deff}</p>
@@ -85,7 +85,7 @@ function List(props) {
 
 
   return (
-    <div >
+    <div style={{ textAlign: 'center', marginTop: '100px' }} >
       <Label>
         <Label>Items Per Page</Label>
 
@@ -100,7 +100,7 @@ function List(props) {
       </ul>
       <Icon icon="double-chevron-left" onClick={() => next()}></Icon>
       <Icon icon='double-chevron-right' onClick={() => previous()}></Icon>
-    </div>
+    </div >
   )
 }
 
