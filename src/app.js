@@ -17,6 +17,7 @@ function App(props) {
   return (
     <AuthProvider>
       <NavBar />
+      {/* <Login /> */}
       <Auth capability="read">
         <ListContext>
           <ToDo />
