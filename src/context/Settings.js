@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { v4 as uuid } from 'uuid';
+import { AuthContext } from '../context/auth'
 export const ListContext = React.createContext();
+
+
 
 function List(props) {
 
@@ -9,22 +12,25 @@ function List(props) {
   const [itemNumber, setItemNumber] = useState();
   const [a, setA] = useState("on");
   const [done, setDone] = useState([]);
-
+  const { loggedIn, setLoggedIn, user, setUser, validateToken, logout, login, setLoginState, signup } = useContext(AuthContext);
   function handleSubmit(event) {
 
-    if (event) event.preventDefault();
-    values.id = uuid();
-    values.complete = false;
+    if (user.capabilities.includes('create')) {
+      if (event) event.preventDefault();
+      values.id = uuid();
+      values.complete = false;
 
-    console.log(values);
-    localStorage.setItem('List', JSON.stringify([...list, values]))
-    setList(JSON.parse(localStorage.getItem('List')));
+      console.log(values);
+      localStorage.setItem('List', JSON.stringify([...list, values]))
+      setList(JSON.parse(localStorage.getItem('List')));
+    } else { alert("you cant creat") }
   }
 
   function handlePaginationChange(e) {
-
-    localStorage.setItem('itemNumber', JSON.stringify(e.target.value))
-    setItemNumber(JSON.parse(localStorage.getItem('itemNumber')));
+    if (user.capabilities.includes('update')) {
+      localStorage.setItem('itemNumber', JSON.stringify(e.target.value))
+      setItemNumber(JSON.parse(localStorage.getItem('itemNumber')));
+    } else { alert("you cant edit") }
   }
   function handleChange(event) {
     console.log(event.target.value, "kkkkkk");
@@ -61,36 +67,41 @@ function List(props) {
 
   }, [])
   function displayComplete() {
-    if (done === list)
-      setDone(() => done.filter((item) => item.complete !== true));
-    else setDone(list);
+    if (user.capabilities.includes('update')) {
+      if (done === list)
+        setDone(() => done.filter((item) => item.complete !== true));
+      else setDone(list);
 
-    done === list ? setA('off') : setA('on')
+      done === list ? setA('off') : setA('on')
+    } else { alert("you cant update") }
   }
 
   function toggleComplete(id) {
 
+    if (user.capabilities.includes('update')) {
+      const items = list.map((item) => {
+        if (item.id === id) {
 
-    const items = list.map((item) => {
-      if (item.id === id) {
+          item.complete = !item.complete;
+        }
+        return item;
+      });
+      localStorage.setItem('List', JSON.stringify(items))
+      let c = JSON.parse(localStorage.getItem('List'))
+      setList(c);
 
-        item.complete = !item.complete;
-      }
-      return item;
-    });
-    localStorage.setItem('List', JSON.stringify(items))
-    let c = JSON.parse(localStorage.getItem('List'))
-    setList(c);
-
+    } else { alert("you cant update") }
   }
 
+
   function deleteItem(id) {
+    if (user.capabilities.includes('delete')) {
+      const items = JSON.parse(localStorage.getItem('List')).filter(item => item.id !== id);
 
-    const items = JSON.parse(localStorage.getItem('List')).filter(item => item.id !== id);
-
-    localStorage.setItem('List', JSON.stringify(items))
-    let c = JSON.parse(localStorage.getItem('List'))
-    setList(c);
+      localStorage.setItem('List', JSON.stringify(items))
+      let c = JSON.parse(localStorage.getItem('List'))
+      setList(c);
+    } else { alert("you cant delete") }
   }
 
   return <ListContext.Provider value={{ list, handleSubmit, handleChange, toggleComplete, handlePaginationChange, a, setA, deleteItem, itemNumber, setItemNumber, setList, displayComplete, done, setDone }}>{props.children}</ListContext.Provider>;

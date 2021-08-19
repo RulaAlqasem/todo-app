@@ -33,7 +33,7 @@ const ToDo = (props) => {
   return (
     <>
       <Navbar>
-        <h1>To Do List: {incomplete} items pending</h1>
+        <h1>{incomplete} items pending</h1>
       </Navbar>
       <card className='app'>
         <FormGroup  >
