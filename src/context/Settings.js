@@ -24,10 +24,7 @@ function List(props) {
     setValues((values) => ({ ...values, [event.target.name]: event.target.value }));
 
   }
-  let test = {
-    id: 11,
-    complete: false
-  }
+
   let saveto = async () => {
     if (JSON.parse(localStorage.getItem('List'))) {
       setList(JSON.parse(localStorage.getItem('List')))
@@ -55,8 +52,10 @@ function List(props) {
       }
       return item;
     });
+    localStorage.setItem('List', JSON.stringify(items))
+    let c = JSON.parse(localStorage.getItem('List'))
+    setList(c);
 
-    setList(items);
   }
 
   function deleteItem(id) {
