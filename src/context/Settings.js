@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 export const ListContext = React.createContext();
 
@@ -9,12 +9,14 @@ function List(props) {
   const [itemNumber, setItemNumber] = useState(3);
 
   function handleSubmit(event) {
+
     if (event) event.preventDefault();
     values.id = uuid();
     values.complete = false;
-    setList([...list, values]);
+
     console.log(values);
-    localStorage.setItem('List', JSON.stringify(list))
+    localStorage.setItem('List', JSON.stringify([...list, values]))
+    setList(JSON.parse(localStorage.getItem('List')));
   }
 
   function handleChange(event) {
@@ -22,6 +24,26 @@ function List(props) {
     setValues((values) => ({ ...values, [event.target.name]: event.target.value }));
 
   }
+  let test = {
+    id: 11,
+    complete: false
+  }
+  let saveto = async () => {
+    if (JSON.parse(localStorage.getItem('List'))) {
+      setList(JSON.parse(localStorage.getItem('List')))
+    }
+    return () => {
+      let localList = JSON.parse(localStorage.getItem('List'))
+
+      setList(localList);
+    }
+  }// eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+
+    saveto().then(() => { console.log("done") })
+
+  }, [])
 
   function toggleComplete(id) {
 
@@ -39,8 +61,11 @@ function List(props) {
 
   function deleteItem(id) {
 
-    const items = list.filter(item => item.id !== id);
-    setList(items);
+    const items = JSON.parse(localStorage.getItem('List')).filter(item => item.id !== id);
+
+    localStorage.setItem('List', JSON.stringify(items))
+    let c = JSON.parse(localStorage.getItem('List'))
+    setList(c);
   }
 
   return <ListContext.Provider value={{ list, handleSubmit, handleChange, toggleComplete, deleteItem, itemNumber, setItemNumber, setList }}>{props.children}</ListContext.Provider>;
