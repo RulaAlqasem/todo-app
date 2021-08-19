@@ -13,3 +13,10 @@
  ### [pull req 3](https://github.com/RulaAlqasem/todo-app/pull/7)
 ### [netlify](https://deploy-preview-7--eloquent-meninsky-cb757d.netlify.app/?utm_source=github&utm_campaign=bot_dp)
 
+# lab 33
+
+### [pull req1](https://github.com/RulaAlqasem/todo-app/pull/8)
+ ### [pull req2](https://github.com/RulaAlqasem/todo-app/pull/9)
+
+### [netlify](https://deploy-preview-9--admiring-liskov-58c84c.netlify.app/?utm_source=github&utm_campaign=bot_dp)
+
