@@ -11,7 +11,7 @@ import { ListContext } from '../context/Settings';
 
 function List(props) {
 
-  const { list, toggleComplete, deleteItem, itemNumber, setItemNumber, setList, handlePaginationChange, displayComplete, done, setDone, a, setA } = useContext(ListContext);
+  const { list, toggleComplete, deleteItem, itemNumber, handlePaginationChange, displayComplete, done, setDone, a } = useContext(ListContext);
 
 
 
@@ -76,8 +76,8 @@ function List(props) {
         <p>Assigned to: {item.assignee}</p>
         <p>difficulty : {deff}</p>
 
-        <Button className="btn" onClick={() => toggleComplete(item.id)}>{item.complete ? 'complete' : "incomplete"}</Button>
-        <Button className="btn" onClick={() => deleteItem(item.id)}>Delete</Button>
+        <Button className="btn" onClick={() => toggleComplete(item)}>{item.complete ? 'complete' : "incomplete"}</Button>
+        <Button className="btn" onClick={() => deleteItem(item._id)}>Delete</Button>
       </Card>
     )
   });

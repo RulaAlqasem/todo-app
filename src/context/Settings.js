@@ -1,8 +1,8 @@
+import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
 import { v4 as uuid } from 'uuid';
 import { AuthContext } from '../context/auth'
 export const ListContext = React.createContext();
-
 
 
 function List(props) {
@@ -12,8 +12,13 @@ function List(props) {
   const [itemNumber, setItemNumber] = useState();
   const [a, setA] = useState("on");
   const [done, setDone] = useState([]);
-  const { loggedIn, setLoggedIn, user, setUser, validateToken, logout, login, setLoginState, signup } = useContext(AuthContext);
-  function handleSubmit(event) {
+  const { user } = useContext(AuthContext);
+
+
+  let API_TO = 'https://api-js401.herokuapp.com/api/v1/todo'
+
+
+  async function handleSubmit(event) {
 
     if (user.capabilities.includes('create')) {
       if (event) event.preventDefault();
@@ -21,10 +26,24 @@ function List(props) {
       values.complete = false;
 
       console.log(values);
-      localStorage.setItem('List', JSON.stringify([...list, values]))
-      setList(JSON.parse(localStorage.getItem('List')));
+      let item1 = [...list, values]
+      let item = {
+        "complete": values.complete,
+        "difficulty": values.difficulty,
+        "id": values.id,
+        "text": values.text,
+        "assignee": values.assignee,
+      }
+
+        ; let a = await axios.post(API_TO, item)
+      let c = (await axios.get(API_TO)).data.results
+      console.log(c);
+      setList(c);
     } else { alert("you cant creat") }
   }
+
+
+
 
   function handlePaginationChange(e) {
     if (user.capabilities.includes('update')) {
@@ -39,14 +58,8 @@ function List(props) {
   }
 
   let getList = async () => {
-    if (JSON.parse(localStorage.getItem('List'))) {
-      setList(JSON.parse(localStorage.getItem('List')))
-    }
-    return () => {
-      let localList = JSON.parse(localStorage.getItem('List'))
-
-      setList(localList);
-    }
+    let c = (await axios.get(API_TO)).data.results
+    setList(c);
   }// eslint-disable-line react-hooks/exhaustive-deps
   let getItemNum = async () => {
     if (JSON.parse(localStorage.getItem('itemNumber'))) {
@@ -58,11 +71,16 @@ function List(props) {
       setItemNumber(localList);
     }
   }
-  useEffect(() => {
+
+
+
+  useEffect(async () => {
 
     getItemNum().then(() => { console.log("done") })
 
     getList().then(() => { console.log("done") })
+    let c = (await axios.get(API_TO)).data.results
+    setList(c);
 
 
   }, [])
@@ -76,30 +94,29 @@ function List(props) {
     } else { alert("you cant update") }
   }
 
-  function toggleComplete(id) {
+  async function toggleComplete(item) {
 
     if (user.capabilities.includes('update')) {
-      const items = list.map((item) => {
-        if (item.id === id) {
 
-          item.complete = !item.complete;
-        }
-        return item;
-      });
-      localStorage.setItem('List', JSON.stringify(items))
-      let c = JSON.parse(localStorage.getItem('List'))
+      item.complete = !item.complete;
+      let l = {
+        "complete": item.complete
+      }
+      let a = await axios.put(`${API_TO}/${item._id}`, l)
+      let c = (await axios.get(API_TO)).data.results
       setList(c);
+
 
     } else { alert("you cant update") }
   }
 
 
-  function deleteItem(id) {
+  async function deleteItem(_id) {
     if (user.capabilities.includes('delete')) {
-      const items = JSON.parse(localStorage.getItem('List')).filter(item => item.id !== id);
-
-      localStorage.setItem('List', JSON.stringify(items))
-      let c = JSON.parse(localStorage.getItem('List'))
+      let a = await axios.delete(`${API_TO}/${_id}`)
+      console.log(a);
+      let c = (await axios.get(API_TO)).data.results
+      console.log(c);
       setList(c);
     } else { alert("you cant delete") }
   }
